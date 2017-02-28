@@ -11,7 +11,6 @@ module Refinery
                       :find_all_readtime_categories,
                       :find_all_expertise_categories,
                       :find_all_score_categories,
-                      # :add_score_category,
                       :only => [:new, :edit, :create, :update]
 
         before_filter :check_category_ids, :only => :update
@@ -127,17 +126,6 @@ module Refinery
         def find_all_score_categories
           @score_categories = Refinery::Blog::Category.where("cat_type = 'health_score'")
         end
-
-        # def add_score_category
-        #   @post = Refinery::Blog::Post.friendly.find(params[:id])
-        #   # @new_score = Category.create(cat_type: "read_time")
-        #   # @post.categories << @new_score
-        #   @new_health_cat = Category.find_or_create_by_cat_type_and_value('health_score', params[:category][:value])
-        #   # unless Category.exists?(:cat_type => "read_time")
-        #   #   Category.create(cat_type: "read_time")
-        #   # end
-        #   # @post.categories.value << value
-        # end
 
         def check_category_ids
           params[:post][:category_ids] ||= []
