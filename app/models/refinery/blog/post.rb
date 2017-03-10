@@ -6,6 +6,13 @@ module Refinery
     class Post < ActiveRecord::Base
       extend FriendlyId
 
+      include PgSearch
+      pg_search_scope :search_by_title,
+                      :against => [:title],
+                      :using => {
+                        :tsearch => {:any_word => true}
+                      }
+
       translates :title, :body, :custom_url, :custom_teaser, :slug, :include => :seo_meta
 
       friendly_id :friendly_id_source, :use => [:slugged, :globalize]
@@ -33,7 +40,7 @@ module Refinery
       class Translation
         is_seo_meta
       end
-      
+
       # Override this to disable required authors
       def author_required?
         true
