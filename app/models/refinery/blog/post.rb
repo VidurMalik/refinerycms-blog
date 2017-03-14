@@ -8,10 +8,12 @@ module Refinery
 
       include PgSearch
       pg_search_scope :search_by_title,
-                      :against => [:title],
-                      :using => {
-                        :tsearch => {:any_word => true}
-                      }
+                      :using => [:tsearch, :trigram, :dmetaphone],
+                      # :using => {
+                      #   :tsearch => {:any_word => true}
+                      # },
+                      :associated_against => {:translations => [:title]}
+
 
       translates :title, :body, :custom_url, :custom_teaser, :slug, :include => :seo_meta
 

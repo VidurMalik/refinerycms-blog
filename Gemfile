@@ -5,6 +5,7 @@ gem "refinerycms-authentication-devise", '~> 1.0.4'
 gemspec
 
 gem 'refinerycms', '~> 3.0.5'
+gem 'pg_search'
 
 group :development, :test do
   gem 'refinerycms-testing', '~> 3.0.5'
